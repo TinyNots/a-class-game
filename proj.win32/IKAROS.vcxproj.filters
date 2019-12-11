@@ -13,6 +13,12 @@
     <Filter Include="src\Scenes">
       <UniqueIdentifier>{2e3a90d3-78d4-468d-8c8f-09c74d363e26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Managers">
+      <UniqueIdentifier>{bc155cdd-8047-4a8c-bcad-eda90949cf59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Inputs">
+      <UniqueIdentifier>{0c48e45e-dc32-4001-b4bb-06d5343781ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,6 +36,21 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>src\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\InputManager.cpp">
+      <Filter>src\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Key.cpp">
+      <Filter>src\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Touch.cpp">
+      <Filter>src\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Controller.cpp">
+      <Filter>src\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\_DebugConOut.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -46,6 +67,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>src\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\InputManager.h">
+      <Filter>src\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Key.h">
+      <Filter>src\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Touch.h">
+      <Filter>src\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Controller.h">
+      <Filter>src\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\_DebugConOut.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

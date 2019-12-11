@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
+#include "ResultScene.h"
 
 USING_NS_CC;
 
@@ -62,7 +63,7 @@ bool GameScene::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 
-	auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+	auto label = Label::createWithTTF("Game Scene", "fonts/Marker Felt.ttf", 24);
 	if (label == nullptr)
 	{
 		problemLoading("'fonts/Marker Felt.ttf'");
@@ -91,6 +92,10 @@ bool GameScene::init()
 		// add the sprite as a child to this layer
 		this->addChild(sprite, 0);
 	}
+
+	test = new InputManager();
+	test->init();
+	this->addChild(test);
 	return true;
 }
 
@@ -98,7 +103,8 @@ bool GameScene::init()
 void GameScene::menuCloseCallback(Ref* pSender)
 {
 	//Close the cocos2d-x game scene and quit the application
-	Director::getInstance()->end();
+	auto scene = ResultScene::createScene();
+	Director::getInstance()->replaceScene(scene);
 
 	/*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
 
