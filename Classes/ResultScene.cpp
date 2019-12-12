@@ -5,7 +5,8 @@ USING_NS_CC;
 
 cocos2d::Scene * ResultScene::createScene()
 {
-	return ResultScene::create();
+	auto scene = ResultScene::create();
+	return scene;
 }
 
 // Print useful error message instead of segfaulting when files are not there.

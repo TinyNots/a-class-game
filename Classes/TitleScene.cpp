@@ -5,7 +5,8 @@ USING_NS_CC;
 
 cocos2d::Scene * TitleScene::createScene()
 {
-	return TitleScene::create();
+	auto scene = TitleScene::create();
+	return scene;
 }
 
 bool TitleScene::init()

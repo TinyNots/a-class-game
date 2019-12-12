@@ -1,12 +1,16 @@
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
 #include "ResultScene.h"
+#include "Player.h"
+#include "InputManager.h"
 
 USING_NS_CC;
 
 Scene* GameScene::createScene()
 {
-	return GameScene::create();
+	auto scene = GameScene::create();
+	scene->addChild(InputManager::getInstance().GetPointer());
+	return scene;
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -93,9 +97,10 @@ bool GameScene::init()
 		this->addChild(sprite, 0);
 	}
 
-	test = new InputManager();
-	test->init();
-	this->addChild(test);
+	this->addChild(Player::createPlayer());
+
+	this->scheduleUpdate();
+
 	return true;
 }
 
@@ -110,4 +115,8 @@ void GameScene::menuCloseCallback(Ref* pSender)
 
 	//EventCustom customEndEvent("game_scene_close_event");
 	//_eventDispatcher->dispatchEvent(&customEndEvent);
+}
+
+void GameScene::update(float dt)
+{
 }

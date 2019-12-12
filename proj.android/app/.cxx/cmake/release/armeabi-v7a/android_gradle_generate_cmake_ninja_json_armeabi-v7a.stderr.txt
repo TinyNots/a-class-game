@@ -1,0 +1,9 @@
+CMake Error at CMakeLists.txt:119 (add_library):
+  Cannot find source file:
+
+    Classes/HelloWorldScene.h
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp
+  .hxx .in .txx
+
+
