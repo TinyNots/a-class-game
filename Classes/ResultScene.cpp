@@ -1,11 +1,13 @@
 #include "ResultScene.h"
 #include "TitleScene.h"
+#include "InputManager.h"
 
 USING_NS_CC;
 
 cocos2d::Scene * ResultScene::createScene()
 {
 	auto scene = ResultScene::create();
+	scene->addChild(InputManager::getInstance().GetPointer());
 	return scene;
 }
 
@@ -91,6 +93,9 @@ bool ResultScene::init()
 		// add the sprite as a child to this layer
 		this->addChild(sprite, 0);
 	}
+
+	this->scheduleUpdate();
+
 	return true;
 }
 
@@ -98,4 +103,9 @@ void ResultScene::menuCloseCallback(cocos2d::Ref * pSender)
 {
 	auto scene = TitleScene::createScene();
 	Director::getInstance()->replaceScene(scene);
+}
+
+void ResultScene::update(float dt)
+{
+	InputManager::getInstance().Update();
 }

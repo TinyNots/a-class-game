@@ -3,6 +3,7 @@
 #include "ResultScene.h"
 #include "Player.h"
 #include "InputManager.h"
+#include "Guns.h"
 
 USING_NS_CC;
 
@@ -119,4 +120,6 @@ void GameScene::menuCloseCallback(Ref* pSender)
 
 void GameScene::update(float dt)
 {
+	test.Update(dt);
+	InputManager::getInstance().Update();
 }

@@ -9,4 +9,5 @@ private:
 	CREATE_FUNC(ResultScene);
 	virtual bool init() override;
 	void menuCloseCallback(cocos2d::Ref* pSender);
+	virtual void update(float dt) override;
 };

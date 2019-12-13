@@ -2,7 +2,11 @@
 #include "Key.h"
 #include "Touch.h"
 
-#define key static_cast<int>(keyCode)
+#define Key static_cast<int>(keyCode)
+
+USING_NS_CC;
+using KeyCode = EventKeyboard::KeyCode;
+using MouseButton = EventMouse::MouseButton;
 
 InputManager* InputManager::_instance = nullptr;
 
@@ -28,12 +32,13 @@ InputManager * InputManager::GetPointer(void)
 {
 	if (_instance != nullptr)
 	{
+		_instance->removeFromParent();
 		return _instance;
 	}
 	return nullptr;
 }
 
-void InputManager::update(float dt)
+void InputManager::Update(void)
 {
 	for (int i = 0; i < 256; i++)
 	{
@@ -41,29 +46,59 @@ void InputManager::update(float dt)
 	}
 }
 
-bool InputManager::Getkey(cocos2d::EventKeyboard::KeyCode keyCode) const
+bool InputManager::GetKey(KeyCode keyCode) const
 {
-	return _keyStates[key];
+	return _keyStates[Key];
 }
 
-bool InputManager::GetkeyUp(cocos2d::EventKeyboard::KeyCode keyCode) const
+bool InputManager::GetKey(MouseButton button) const
 {
-	return !!_keyStates[key] && _oldStates[key];
+	auto index = ENUM_TO_INT(KeyCode::KEY_PLAY) + ENUM_TO_INT(button) + 1;
+	return _keyStates[index];
 }
 
-bool InputManager::GetKeyDown(cocos2d::EventKeyboard::KeyCode keyCode) const
+bool InputManager::GetKeyUp(KeyCode keyCode) const
 {
-	return _keyStates[key] && !_oldStates[key];
+	return !_keyStates[Key] && _oldStates[Key];
+}
+
+bool InputManager::GetKeyUp(MouseButton button) const
+{
+	auto index = ENUM_TO_INT(KeyCode::KEY_PLAY) + ENUM_TO_INT(button) + 1;
+	return !_keyStates[index] && _oldStates[index];
+}
+
+bool InputManager::GetKeyDown(KeyCode keyCode) const
+{
+	return _keyStates[Key] && !_oldStates[Key];
+}
+
+bool InputManager::GetKeyDown(MouseButton button) const
+{
+	auto index = ENUM_TO_INT(KeyCode::KEY_PLAY) + ENUM_TO_INT(button) + 1;
+	return _keyStates[index] && !_oldStates[index];
+}
+
+cocos2d::Vec2 InputManager::GetCursorPos(void) const
+{
+	return _cursorPos;
 }
 
 InputManager::InputManager()
 {
-	for (auto & keyState : _keyStates)
+	// key init
+	for(auto & keyState : _keyStates)
 	{
 		keyState = false;
 	}
 
-	this->scheduleUpdate();
+	for (auto & oldState : _oldStates)
+	{
+		oldState = false;
+	}
+
+	// mouse init
+	_cursorPos = cocos2d::Vec2::ZERO;
 }
 
 InputManager::~InputManager()

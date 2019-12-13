@@ -10,5 +10,6 @@ public:
 private:
 	CREATE_FUNC(Player);
 	void update(float dt);
+	void Rotation(void);
 };
 
