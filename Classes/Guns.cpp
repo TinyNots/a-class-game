@@ -1,5 +1,6 @@
 #include "Guns.h"
 #include "InputManager.h"
+#include "Bullet.h"
 
 USING_NS_CC;
 
@@ -10,15 +11,16 @@ GunsHandler::GunsHandler()
 	Gun submachineGun;
 
 	pistol.automatic = true;
-	pistol.maxAmmo = 12;
-	pistol.currentAmmo;
+	pistol.maxAmmo = 30;
+	pistol.currentAmmo = pistol.maxAmmo;
 	pistol.damage = 20;
-	pistol.fireRate = 0.2f;
+	pistol.fireRate = 15.0f;
 	pistol.nextTimeToFire = 0.0f;
 	pistol.reloadTime = 2.0f;
 
 	currentGun = pistol;
 	_counter = 0.0f;
+	_reloadCounter = 0.0f;
 }
 
 GunsHandler::~GunsHandler()
@@ -35,41 +37,49 @@ void GunsHandler::Update(float dt)
 		return;
 	}
 
-	if (currentGun.currentAmmo < 0)
+	if (currentGun.currentAmmo <= 0)
 	{
+		currentGun.isReloading = true;
+		log("Reloading...");
 		return;
 	}
 
-	if (currentGun.automatic)
+	bool inputCheck = GET_KEY(EventMouse::MouseButton::BUTTON_LEFT);
+
+	if (!currentGun.automatic)
 	{
-		if (GET_KEY(EventMouse::MouseButton::BUTTON_LEFT) && _counter >= currentGun.nextTimeToFire)
-		{
-			currentGun.nextTimeToFire = _counter + 1.0f / currentGun.fireRate;
-			log("Shoot");
-		}
+		inputCheck = GET_KEY_DOWN(EventMouse::MouseButton::BUTTON_LEFT);
 	}
-	else
+
+	if (inputCheck && _counter >= currentGun.nextTimeToFire)
 	{
-		if (GET_KEY_DOWN(EventMouse::MouseButton::BUTTON_LEFT) && _counter >= currentGun.nextTimeToFire)
+		for (int i = 0; i < 10; i++)
 		{
-			currentGun.nextTimeToFire = _counter + 1.0f / currentGun.fireRate;
-			log("Shoot");
+			Bullet::createBullet();
 		}
+
+		currentGun.nextTimeToFire = _counter + SecToFrame(1.0f) / currentGun.fireRate;
+		log("Shoot %d", currentGun.currentAmmo);
+		currentGun.currentAmmo--;
 	}
 }
 
 void GunsHandler::Reload(void)
 {
-	currentGun.isReloading = true;
-	log("Reloading...");
-
-	auto tmpCounter = 0;
-	while (tmpCounter < currentGun.reloadTime * 60.0f)
+	if (_reloadCounter < SecToFrame(currentGun.reloadTime - 1.0f))
 	{
-		tmpCounter++;
+		_reloadCounter++;
 	}
+	else
+	{
+		_reloadCounter = 0;
+		currentGun.isReloading = false;
+		currentGun.currentAmmo = currentGun.maxAmmo;
+		log("Reload Complete...");
+	}
+}
 
-	currentGun.currentAmmo = currentGun.maxAmmo;
-	currentGun.isReloading = false;
-	log("Reload Complete...");
+float GunsHandler::SecToFrame(float second)
+{
+	return second * 60.0f;
 }

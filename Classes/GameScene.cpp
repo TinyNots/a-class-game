@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "Guns.h"
+#include "Enemy.h"
 
 USING_NS_CC;
 
@@ -121,5 +122,11 @@ void GameScene::menuCloseCallback(Ref* pSender)
 void GameScene::update(float dt)
 {
 	test.Update(dt);
+
+	if(GET_KEY_DOWN(EventKeyboard::KeyCode::KEY_Q))
+	{
+		this->addChild(Enemy::createEnemy());
+	}
+
 	InputManager::getInstance().Update();
 }

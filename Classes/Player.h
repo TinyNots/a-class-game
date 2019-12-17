@@ -4,7 +4,7 @@
 class Player : public cocos2d::Sprite
 {
 public:
-	static Player* createPlayer();
+	static Player* createPlayer(void);
 	Player();
 	~Player();
 private:

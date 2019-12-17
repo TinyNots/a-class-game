@@ -72,6 +72,9 @@
     <ClCompile Include="..\Classes\Enemy.cpp">
       <Filter>src\Characters\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Helper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Enemy.h">
       <Filter>src\Characters\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Helper.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

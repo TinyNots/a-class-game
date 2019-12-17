@@ -4,19 +4,20 @@
 
 USING_NS_CC;
 
-Player * Player::createPlayer()
+Player * Player::createPlayer(void)
 {
 	return Player::create();
 }
 
 Player::Player()
 {
+	this->setName("Player");
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	this->setPosition(visibleSize.width / 2.0f, visibleSize.height / 2.0f);
 
 	// player image
 	auto circle = DrawNode::create();
-	circle->drawCircle(Vec2::ZERO, 20.0f, 360.0f, 40, false, Color4F::RED);
+	circle->drawCircle(Vec2::ZERO, 20.0f, 0.0f, 40, false, Color4F::RED);
 	circle->drawLine(Vec2(20.0f, 0.0f), Vec2(35.0f, 0.0f), Color4F::RED);
 
 	this->addChild(circle);

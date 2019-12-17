@@ -25,4 +25,6 @@ private:
 	void Reload(void);
 	Gun currentGun;
 	float _counter;
+	float _reloadCounter;
+	float SecToFrame(float second);
 };
